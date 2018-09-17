@@ -14,6 +14,7 @@ return [
     'home'                            => 'ノードと情報',
     'services'                        => 'ショップ',
     'traffic_log'                     => '使用記録',
+    'help'                            => '手伝いをする',
     'invite_code'                     => '招待コード',
     'invoices'                        => 'ビル',
     'tickets'                         => 'サポート',
@@ -123,6 +124,7 @@ return [
     'invoice_title'                   => 'ビル',
     'invoice_table_id'                => 'ビル番号',
     'invoice_table_name'              => 'サービス',
+    'invoice_table_pay_way'           => '支払い方式',
     'invoice_table_price'             => '金額',
     'invoice_table_create_date'       => '購入日',
     'invoice_table_expire_at'         => '有効期限',
@@ -133,6 +135,7 @@ return [
     'invoice_table_wait_confirm'      => '確認を待っています',
     'invoice_table_wait_active'       => '使用中',
     'invoice_table_expired'           => '期限が切れた',
+    'invoice_table_goods_deleted'     => '[削除]',
 
     // 工单
     'ticket_title'                    => '私のサービスリスト',

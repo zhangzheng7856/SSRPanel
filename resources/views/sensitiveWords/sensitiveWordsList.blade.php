@@ -20,7 +20,7 @@
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption font-dark">
-                            <span class="caption-subject bold uppercase"> 敏感词列表 </span>
+                            <span class="caption-subject bold uppercase"> 敏感词列表 </span><small>（用于屏蔽注册邮箱后缀）</small>
                         </div>
                         <div class="actions">
                             <div class="btn-group">
@@ -35,7 +35,7 @@
                                 <tr>
                                     <th> # </th>
                                     <th> 敏感词 </th>
-                                    <th> 创建时间 </th>
+                                    <th> 操作 </th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -48,7 +48,11 @@
                                         <tr class="odd gradeX">
                                             <td> {{$vo->id}} </td>
                                             <td> {{$vo->words}} </td>
-                                            <td> {{$vo->created_at}} </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm red btn-outline" onclick="delWord('{{$vo->id}}')">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -115,6 +119,22 @@
             });
 
             layer.close(index);
+        }
+
+        // 删除敏感词
+        function delWord(id)
+        {
+            layer.confirm('确定删除该敏感词？', {icon: 2, title:'警告'}, function(index) {
+                $.post("{{url('sensitiveWords/del')}}", {id:id, _token:'{{csrf_token()}}'}, function(ret) {
+                    layer.msg(ret.message, {time:1000}, function() {
+                        if (ret.status == 'success') {
+                            window.location.reload();
+                        }
+                    });
+                });
+
+                layer.close(index);
+            });
         }
     </script>
 @endsection

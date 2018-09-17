@@ -38,13 +38,11 @@ class SubscribeController extends Controller
             exit($this->noneNode());
         }
 
-        // TODO：需要加入防探测机制
-
         // 更新访问次数
         $subscribe->increment('times', 1);
 
         // 记录每次请求
-        $this->log($subscribe->id, $request->getClientIp(), $request->headers);
+        $this->log($subscribe->id, getClientIp(), $request->headers);
 
         // 获取这个账号可用节点
         $userLabelIds = UserLabel::query()->where('user_id', $user->id)->pluck('label_id');

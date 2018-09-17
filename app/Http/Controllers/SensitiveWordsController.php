@@ -31,13 +31,25 @@ class SensitiveWordsController extends Controller
         }
 
         $obj = new SensitiveWords();
-        $obj->words = trim($request->input('words'));
-        $obj->created_at = date('Y-m-d H:i:s');
+        $obj->words = trim(strtolower($request->input('words')));
         $result = $obj->save();
         if ($result) {
             return Response::json(['status' => 'success', 'data' => '', 'message' => '添加成功']);
         } else {
             return Response::json(['status' => 'fail', 'data' => '', 'message' => '添加失败']);
+        }
+    }
+
+    // 删除敏感词
+    public function delSensitiveWords(Request $request)
+    {
+        $id = intval($request->get('id'));
+
+        $result = SensitiveWords::query()->where('id', $id)->delete();
+        if ($result) {
+            return Response::json(['status' => 'success', 'data' => '', 'message' => '删除成功']);
+        } else {
+            return Response::json(['status' => 'fail', 'data' => '', 'message' => '删除失败']);
         }
     }
 
